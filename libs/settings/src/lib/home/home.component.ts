@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { cities, City, PreferenceService } from '@weather/shared-services';
 
 @Component({
   selector: 'weather-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  styleUrls: ['./home.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
   selectedCities: City[] = [];
@@ -28,7 +29,10 @@ export class HomeComponent implements OnInit {
   }
 
   onChange($event) {
-    this.selectedCities.push($event);
+    this.selectedCities = [
+      ...this.selectedCities,
+      $event
+    ];
     this.preferenceService.setSelectedCities(this.selectedCities);
     this.cities.splice(this.cities.indexOf($event), 1);
   }
