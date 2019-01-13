@@ -1,0 +1,11 @@
+<div *ngFor="let city of cities">
+  {{ city.name }}
+  <button
+    (click)="removed.emit(city)"
+    title="Click to remove"
+    class="close"
+    aria-label="Close"
+  >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

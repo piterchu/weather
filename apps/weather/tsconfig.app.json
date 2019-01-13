@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/out-tsc/apps/weather",
+    "types": []
+  },
+  "exclude": ["src/test-setup.ts", "**/*.spec.ts"],
+  "include": [
+    "**/*.ts",
+    "../../libs/settings/src/index.ts",
+    "../../libs/shared-components/src/index.ts",
+    "../../libs/home/src/index.ts"
+  ]
+}

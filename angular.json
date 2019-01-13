@@ -2,7 +2,248 @@
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
   "version": 1,
   "newProjectRoot": "",
-  "projects": {},
+  "projects": {
+    "weather": {
+      "root": "apps/weather/",
+      "sourceRoot": "apps/weather/src",
+      "projectType": "application",
+      "prefix": "weather",
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/weather",
+            "index": "apps/weather/src/index.html",
+            "main": "apps/weather/src/main.ts",
+            "polyfills": "apps/weather/src/polyfills.ts",
+            "tsConfig": "apps/weather/tsconfig.app.json",
+            "assets": [
+              "apps/weather/src/favicon.ico",
+              "apps/weather/src/assets"
+            ],
+            "styles": ["apps/weather/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/weather/src/environments/environment.ts",
+                  "with": "apps/weather/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "weather:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "weather:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "weather:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/weather/tsconfig.app.json",
+              "apps/weather/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "apps/weather/jest.config.js",
+            "tsConfig": "apps/weather/tsconfig.spec.json",
+            "setupFile": "apps/weather/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "weather-e2e": {
+      "root": "apps/weather-e2e",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/builders:cypress",
+          "options": {
+            "cypressConfig": "apps/weather-e2e/cypress.json",
+            "tsConfig": "apps/weather-e2e/tsconfig.e2e.json",
+            "devServerTarget": "weather:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "weather:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/weather-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**"]
+          }
+        }
+      }
+    },
+    "settings": {
+      "root": "libs/settings",
+      "sourceRoot": "libs/settings/src",
+      "projectType": "library",
+      "prefix": "weather",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/settings/tsconfig.lib.json",
+              "libs/settings/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/settings/jest.config.js",
+            "tsConfig": "libs/settings/tsconfig.spec.json",
+            "setupFile": "libs/settings/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "home": {
+      "root": "libs/home",
+      "sourceRoot": "libs/home/src",
+      "projectType": "library",
+      "prefix": "weather",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/home/tsconfig.lib.json",
+              "libs/home/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/home/jest.config.js",
+            "tsConfig": "libs/home/tsconfig.spec.json",
+            "setupFile": "libs/home/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-components": {
+      "root": "libs/shared-components",
+      "sourceRoot": "libs/shared-components/src",
+      "projectType": "library",
+      "prefix": "weather",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-components/tsconfig.lib.json",
+              "libs/shared-components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/shared-components/jest.config.js",
+            "tsConfig": "libs/shared-components/tsconfig.spec.json",
+            "setupFile": "libs/shared-components/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "shared-services": {
+      "root": "libs/shared-services",
+      "sourceRoot": "libs/shared-services/src",
+      "projectType": "library",
+      "prefix": "weather",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/shared-services/tsconfig.lib.json",
+              "libs/shared-services/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/builders:jest",
+          "options": {
+            "jestConfig": "libs/shared-services/jest.config.js",
+            "tsConfig": "libs/shared-services/tsconfig.spec.json"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/schematics:component": {
+          "styleext": "scss"
+        }
+      }
+    }
+  },
   "cli": {
     "warnings": {
       "typescriptMismatch": false,
@@ -18,5 +259,6 @@
     "@nrwl/schematics:library": {
       "style": "scss"
     }
-  }
+  },
+  "defaultProject": "weather"
 }

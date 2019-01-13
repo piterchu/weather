@@ -7,5 +7,24 @@
     "tslint.json": "*",
     "nx.json": "*"
   },
-  "projects": {}
+  "projects": {
+    "weather": {
+      "tags": []
+    },
+    "weather-e2e": {
+      "tags": []
+    },
+    "settings": {
+      "tags": []
+    },
+    "home": {
+      "tags": []
+    },
+    "shared-components": {
+      "tags": []
+    },
+    "shared-services": {
+      "tags": []
+    }
+  }
 }

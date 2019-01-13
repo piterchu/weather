@@ -1,0 +1,18 @@
+<div *ngIf="hasWidgets(); else warning" class="row">
+  <weather-weather-card
+    class="col-md-auto col-xs-12 col-md-3"
+    *ngFor="let card of foreCasts"
+    [iconCode]="card.iconCode"
+    [city]="card.city"
+    [temperature]="card.temperature"
+    [unit]="card.unit"
+  > </weather-weather-card>
+</div>
+
+<ng-template #warning>
+  <div class="danger">
+    <i style="font-size: 48px; text-align: center" class="wi wi-owm-800 icon"></i>
+    <h3>It appears that you have not selected any city yet.</h3>
+    <h4>Please configure some in <a routerLink="/settings">Settings</a></h4>
+  </div>
+</ng-template>

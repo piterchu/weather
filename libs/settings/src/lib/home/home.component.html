@@ -1,0 +1,14 @@
+<h1>SETTINGS</h1>
+<div>
+  <label for="city">Choose a city</label>
+    <select [(ngModel)]="model" (ngModelChange)="onChange($event)" id="city">
+    <option *ngFor="let city of cities" [ngValue]="city">{{
+      city.name
+      }}</option>
+  </select>
+</div>
+
+<weather-country-selector
+  [cities]="selectedCities"
+  (removed)="onItemRemoved($event)"
+></weather-country-selector>
