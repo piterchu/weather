@@ -9,6 +9,6 @@
 </div>
 
 <weather-country-selector
-  [cities]="selectedCities"
+  [cities]="selectedCities|async"
   (removed)="onItemRemoved($event)"
 ></weather-country-selector>

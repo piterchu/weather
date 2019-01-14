@@ -1,20 +1,11 @@
+import { City } from '@weather/shared-services';
 import { CityAction, CityActionTypes } from './city.actions';
 
 export const CITY_FEATURE_KEY = 'city';
 
-/**
- * Interface for the 'City' data used in
- *  - CityState, and
- *  - cityReducer
- *
- *  Note: replace if already defined in another module
- */
-
-/* tslint:disable:no-empty-interface */
-export interface Entity {}
 
 export interface CityState {
-  list: Entity[]; // list of City; analogous to a sql normalized table
+  list: City[]; // list of City; analogous to a sql normalized table
   selectedId?: string | number; // which City record has been selected
   loaded: boolean; // has the City list been loaded
   error?: any; // last none error (if any)
@@ -39,6 +30,13 @@ export function cityReducer(
         ...state,
         list: action.payload,
         loaded: true
+      };
+      break;
+    }
+    case CityActionTypes.AddCity: {
+      state = {
+        ...state,
+        list: state.list.concat(action.payload)
       };
       break;
     }

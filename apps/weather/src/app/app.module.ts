@@ -2,7 +2,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { SharedComponentsModule } from '@weather/shared-components';
-import { cityReducer, CityState } from '@weather/shared-services';
+import { City, cityReducer, CityState } from '@weather/shared-services';
+import { CityActionTypes } from '../../../../libs/shared-services/src/lib/+state/city.actions';
 
 import { AppComponent } from './app.component';
 import { NxModule } from '@nrwl/nx';
@@ -25,6 +26,12 @@ export function citySync(reducer: ActionReducer<{ cityReducer: CityState }>) {
           cityReducer: {list: JSON.parse(data), loaded: true},
         };
       }
+    } else if (action.type === CityActionTypes.AddCity) {
+      const data:City[] = JSON.parse(window.localStorage.getItem('weatherApp')) || [];
+      window.localStorage.setItem(
+        'weatherApp',
+        JSON.stringify(data.concat(action.payload))
+      );
     }
     return reducedState;
   };

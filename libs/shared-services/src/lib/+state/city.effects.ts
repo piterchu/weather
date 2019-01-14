@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
-import { Effect, Actions } from '@ngrx/effects';
+import { Actions, Effect } from '@ngrx/effects';
 import { DataPersistence } from '@nrwl/nx';
+import { CityActionTypes, CityLoaded, CityLoadError, LoadCity } from './city.actions';
 
 import { CityPartialState } from './city.reducer';
-import {
-  LoadCity,
-  CityLoaded,
-  CityLoadError,
-  CityActionTypes
-} from './city.actions';
 
 @Injectable()
 export class CityEffects {
@@ -24,8 +19,9 @@ export class CityEffects {
     }
   });
 
+
   constructor(
     private actions$: Actions,
-    private dataPersistence: DataPersistence<CityPartialState>
+    private dataPersistence: DataPersistence<CityPartialState>,
   ) {}
 }
